@@ -1,17 +1,21 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Cài đặt</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <ion-list>
-    <button ion-item>
-      <ion-label item-start>Bật chế độ đăng nhập vân tay</ion-label>
+    <ion-item>
       <ion-icon item-start name="finger-print"></ion-icon>
-    </button>
+      <ion-label>Bật chế độ đăng nhập vân tay</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="warning"></ion-icon>
+      <ion-label>Bật bảo mật khi gửi/rút tiền</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
   </ion-list>
 </ion-content>
