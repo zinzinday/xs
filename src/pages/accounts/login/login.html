@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Đăng nhập</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="lockingForm" (ngSubmit)="doLocking()">
+    <ion-list class="no-header-form">
+      <ion-item>
+        <ion-label floating>
+          Địa chỉ email hoặc điện thoại
+        </ion-label>
+        <ion-input formControlName="user"></ion-input>
+      </ion-item>
+      <p class="field-error">Email hoặc phone là bắt buộc</p>
+    </ion-list>
+    <a (click)="goRegister()" float-left>Tôi chưa có tài khoản</a>
+    <button ion-button type="submit" float-end icon-end>
+      <span>Tiếp </span>
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </button>
+  </form>
+</ion-content>

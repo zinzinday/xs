@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Mở tài khoản</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
+    <ion-list class="no-header-form">
+      <ion-item>
+        <ion-label floating>
+          Họ Tên
+        </ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+      <p class="field-error">Họ tên là bắt buộc</p>
+      <ion-item>
+        <ion-label floating>
+          Địa chỉ email
+        </ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <p class="field-error">Email là bắt buộc</p>
+      <ion-item>
+        <ion-label floating>
+          Số điện thoại
+        </ion-label>
+        <ion-input formControlName="phone"></ion-input>
+      </ion-item>
+      <p class="field-error">Điện thoại là bắt buộc</p>
+      <ion-item>
+        <ion-label floating>
+          Tài khoản đăng nhập
+        </ion-label>
+        <ion-input formControlName="username"></ion-input>
+      </ion-item>
+      <p class="field-error">Tên đăng nhập là bắt buộc</p>
+      <ion-item>
+        <ion-label floating>
+          Mật khẩu
+        </ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <p class="field-error">Mật khẩu là bắt buộc</p>
+    </ion-list>
+    <a (click)="goLogin()" float-left>Đã có tài khoản?</a>
+    <button ion-button type="submit" float-end icon-end>
+      <span>Tiếp </span>
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </button>
+  </form>
+</ion-content>
