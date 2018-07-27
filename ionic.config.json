@@ -1,0 +1,7 @@
+{
+  "name": "xshn",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
