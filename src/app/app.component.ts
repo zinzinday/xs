@@ -44,6 +44,7 @@ export class MyApp {
               public splashScreen: SplashScreen,
               public keyboard: Keyboard,
               private network: Network,
+              private navigationBar: NavigationBar,
               private auth: AuthProvider) {
     this.initializeApp();
     this.network.onchange().subscribe(networkEvent => {
@@ -85,13 +86,15 @@ export class MyApp {
       this.statusBar.hide();
       this.statusBar.backgroundColorByHexString('#0D47A1');
       this.splashScreen.hide();
+      if (this.platform.is('android')) {
+        this.navigationBar.setUp(true);
+      }
       this.keyboard.hideFormAccessoryBar(true);
       this.platform.registerBackButtonAction(() => {
         if (this.nav.getPrevious()) {
           this.nav.pop({duration: 800}).catch();
         }
       });
-
     });
   }
 

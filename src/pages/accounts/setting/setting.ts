@@ -1,7 +1,6 @@
-import {Component, forwardRef, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
-import {RestProvider} from "../../../providers/rest/rest";
 import {LoginPage} from "../login/login";
 import "rxjs/add/operator/map";
 
@@ -11,8 +10,7 @@ import "rxjs/add/operator/map";
 })
 export class SettingPage {
 
-  constructor(public navCtrl: NavController, public auth: AuthProvider,
-              @Inject(forwardRef(() => RestProvider)) private rest: RestProvider) {
+  constructor(public navCtrl: NavController, public auth: AuthProvider) {
   }
 
   ionViewCanEnter(): Promise<boolean> {
