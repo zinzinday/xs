@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tạo vé số</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="ticketForm" (ngSubmit)="doTicket()">
+    <ion-list class="no-header-form">
+      <ion-item>
+        <ion-label>Khu vực</ion-label>
+        <ion-select formControlName="region" (ionChange)="onChangeRegion()">
+          <ion-option *ngFor="let region of regions" [value]="region.id">Xổ Số {{region.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p class="field-error" *ngIf="hasRequired('region')">
+        Khu vực là bắt buộc
+      </p>
+      <ion-item>
+        <ion-label>Ngày quay</ion-label>
+        <ion-datetime
+          (ionChange)="onDateChange()"
+          formControlName="awardDate"
+          doneText="Xong"
+          cancelText="Hủy"
+          displayFormat="YYYY-MM-DD"
+          pickerFormat="DD MMM YYYY"
+          [min]="minimumBetDate"
+          monthShortNames="Tháng 1,Tháng 2,Tháng 3,Tháng 4,Tháng 5,Tháng 6,Tháng 7,Tháng 8,Tháng 9,Tháng 10,Tháng 11,Tháng 12">
+        </ion-datetime>
+      </ion-item>
+      <p class="field-error" *ngIf="hasRequired('awardDate')">
+        Ngày mở thưởng là bắt buộc
+      </p>
+      <ion-item *ngIf="ticketForm.get('region').value !== 'mien-bac'">
+        <ion-label>Đài</ion-label>
+        <ion-select formControlName="city" (ionChange)="onChangeCity()" cancelText="Hủy" okText="Chọn">
+          <ion-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p class="field-error" *ngIf="hasRequired('city')">
+        Đài là bắt buộc
+      </p>
+      <ion-item>
+        <ion-label>Loại vé số</ion-label>
+        <ion-select formControlName="ticketType" (ionChange)="onChangeType()" cancelText="Hủy" okText="Chọn">
+          <ion-option *ngFor="let ticketType of ticketTypes" [value]="ticketType.id">{{ticketType.shortName}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <p class="field-error" *ngIf="hasRequired('city')">
+        Loại vé số là bắt buộc
+      </p>
+
+      <ion-input-mask
+        label="Bộ số"
+        typeInput="tel"
+        [placeholder]="maskPlaceholder"
+        typeLabel="fixed"
+        formControlName="lotto"
+        [dropSpecialCharacters]="false"
+        [mask]="mask">
+      </ion-input-mask>
+      <p class="field-error" *ngIf="hasRequired('lotto')">
+        Bộ số là bắt buộc
+      </p>
+      <p class="field-error" *ngIf="ticketForm.get('lotto').hasError('unique')">
+        Các bộ số bắt buộc phải khác nhau
+      </p>
+      <p class="field-error"
+         *ngIf="!ticketForm.get('lotto').hasError('unique') && ticketForm.get('lotto').hasError('len')">
+        Bạn phải chọn mỗi bộ số có {{type.lottoLength}} chử số
+      </p>
+      <p class="field-error"
+         *ngIf="!ticketForm.get('lotto').hasError('unique') && !ticketForm.get('lotto').hasError('len') && ticketForm.get('lotto').hasError('pairs')">
+        Bạn phải chọn đủ {{type.lottoPair}} bộ số khác nhau
+      </p>
+      <ion-item>
+        <ion-label>Tổng tiền</ion-label>
+        <ion-input formControlName="betAmount" type="number"></ion-input>
+      </ion-item>
+      <p class="field-error" *ngIf="hasRequired('betAmount')">
+        Số tiền là bắt buộc
+      </p>
+      <p class="field-error" *ngIf="!hasRequired('betAmount') && ticketForm.get('betAmount').hasError('min')">
+        Số tiền phải tối thiểu là 10
+      </p>
+      <p *ngIf="ticketForm.valid">
+        {{rateDescription}}
+      </p>
+    </ion-list>
+    <div float-end>
+      <button ion-button type="submit" [disabled]="ticketForm.invalid">Xác nhận</button>
+    </div>
+  </form>
+</ion-content>

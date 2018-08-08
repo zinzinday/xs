@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Xác minh {{profile?.phone}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="verifyType">
+      <ion-segment-button value="authy">
+        Authy
+      </ion-segment-button>
+      <ion-segment-button value="sms">
+        Tin nhắn
+      </ion-segment-button>
+      <ion-segment-button value="call">
+        Thư thoại
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="profile">
+  <div [ngSwitch]="verifyType">
+    <div *ngSwitchCase="'authy'">
+      <div *ngIf="profile.authyId">
+        <p>Mở ứng dụng <strong>Authy</strong> và sử dụng mã của <strong>XSHN</strong> để xác nhận</p>
+        <form [formGroup]="authyForm" (ngSubmit)="doVerifyAuthy()">
+          <ion-list class="no-header-form">
+            <ion-item>
+              <ion-label floating>Mã xác minh</ion-label>
+              <ion-input formControlName="verifyCode"></ion-input>
+            </ion-item>
+            <p class="field-error" *ngIf="authyForm.get('verifyCode').hasError('api')">
+              {{authyForm.get('verifyCode').getError('api')}}
+            </p>
+          </ion-list>
+          <div float-right>
+            <button ion-button type="submit" small [disabled]="authyForm.invalid">Xác minh</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!profile.authyId">
+          <button ion-button (click)="authyRegister()">Thêm ứng dụng XSHN vào Authy</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="'sms'">
+      <div *ngIf="smsRequested">
+        <p>Mã xác minh 6 số đã được gửi. Hay đọc tin nhắn để lấy mã.</p>
+        <form [formGroup]="smsForm" (ngSubmit)="doVerifySMS()">
+          <ion-list no-margin>
+            <ion-item>
+              <ion-label floating>Mã xác minh</ion-label>
+              <ion-input formControlName="verifyCode"></ion-input>
+            </ion-item>
+          </ion-list>
+          <div>
+            <a ion-button type="submit" small clear float-left>Tôi chưa nhận được tin nhắn</a>
+            <button ion-button type="submit" small float-right>Xác minh</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!smsRequested">
+        <button ion-button small full>Gửi mã xác minh</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="'call'">
+      <div *ngIf="phoneRequested">
+        <p>Chúng tôi đang gọi điện cho bạn. Xin vui lòng nghe máy để lấy mã xác minh.</p>
+        <form [formGroup]="smsForm" (ngSubmit)="doVerifyCall()">
+          <ion-list class="no-header-form">
+            <ion-item>
+              <ion-label floating>Mã xác minh</ion-label>
+              <ion-input formControlName="verifyCode"></ion-input>
+            </ion-item>
+          </ion-list>
+          <div>
+            <a ion-button type="submit" small clear float-left>Gọi lại cho tôi</a>
+            <button ion-button type="submit" small float-right>Xác minh</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!phoneRequested">
+        <button ion-button small full>Gọi điện cho tôi</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

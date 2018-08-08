@@ -1,23 +1,52 @@
 <ion-header>
   <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Đăng nhập</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form [formGroup]="lockingForm" (ngSubmit)="doLocking()">
+  <div *ngIf="!userExist; else login">
+    <form [formGroup]="lookupForm" (ngSubmit)="doLookup()">
+      <ion-list class="no-header-form">
+        <ion-item>
+          <ion-label floating>
+            Địa chỉ email hoặc điện thoại
+          </ion-label>
+          <ion-input formControlName="user"></ion-input>
+        </ion-item>
+        <p class="field-error" *ngIf="hasRequired(lookupForm, 'user')">Email hoặc phone là bắt buộc</p>
+        <p class="field-error" *ngIf="hasApiError(lookupForm, 'user')">{{apiErrorMessage(lookupForm, 'user')}}</p>
+      </ion-list>
+      <a (click)="goRegister()" float-left>Tôi chưa có tài khoản</a>
+      <button ion-button float-end icon-end>
+        <span>Tiếp </span>
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </form>
+  </div>
+</ion-content>
+<ng-template #login>
+  <div align-self-center>
+    <
+    {{userExist?.name}}
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
     <ion-list class="no-header-form">
       <ion-item>
         <ion-label floating>
-          Địa chỉ email hoặc điện thoại
+          Mật khẩu
         </ion-label>
-        <ion-input formControlName="user"></ion-input>
+        <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
-      <p class="field-error">Email hoặc phone là bắt buộc</p>
+      <p class="field-error" *ngIf="hasRequired(loginForm, 'password')">Mật khẩu là bắt buộc</p>
+      <p class="field-error" *ngIf="hasApiError(loginForm, 'password')">{{apiErrorMessage(loginForm, 'password')}}</p>
     </ion-list>
-    <a (click)="goRegister()" float-left>Tôi chưa có tài khoản</a>
+    <a (click)="goRecover()" float-left>Tôi không nhớ mật khẩu</a>
     <button ion-button type="submit" float-end icon-end>
-      <span>Tiếp </span>
+      <span>Đăng nhập </span>
       <ion-icon name="arrow-dropright"></ion-icon>
     </button>
   </form>
-</ion-content>
+</ng-template>

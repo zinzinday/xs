@@ -1,0 +1,17 @@
+page-region {
+  .row-title {
+    color: color($colors, 'danger');
+    line-height: 35px;
+  }
+  .mienbac {
+    ion-row {
+      &:not(:last-child) {
+        border-bottom: 0.55px solid #c8c7cc;
+        line-height: 30px;
+      }
+      .col-row-2 {
+        line-height: 60px;
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tạo vé số</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="typeForm" (ngSubmit)="doCreate()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Short Name</ion-label>
+        <ion-input formControlName="shortName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Khu vuc</ion-label>
+        <ion-select multiple="true" (ionChange)="setCities($event)">
+          <ion-option *ngFor="let region of regions" [value]="region.id">{{region.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Rate</ion-label>
+        <ion-input formControlName="rate" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lotto Length</ion-label>
+        <ion-input formControlName="lottoLength" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lotto Pair</ion-label>
+        <ion-input formControlName="lottoPair" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mix Parlay</ion-label>
+        <ion-toggle formControlName="mixParlay"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Miss All</ion-label>
+        <ion-toggle formControlName="missAll"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lottery Only</ion-label>
+        <ion-toggle formControlName="lotteryOnly" type="boolean"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <button ion-button type="submit">{{typeId ? 'Update': 'Create'}}</button>
+  </form>
+  <button ion-button *ngIf="typeId" (click)="deleteType(typeId)">Delete</button>
+</ion-content>

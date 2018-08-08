@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Kết quả</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="prevDate()">
+        <ion-icon name="arrow-dropleft"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="datePicker.open()">
+        <ion-icon name="calendar"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="nextDate()">
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="regionId">
+      <ion-segment-button value="mien-bac">
+        Miền Bắc
+      </ion-segment-button>
+      <ion-segment-button value="mien-trung">
+        Miền Trung
+      </ion-segment-button>
+      <ion-segment-button value="mien-nam">
+        Miền Nam
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="regionId">
+    <div *ngSwitchCase="'mien-bac'">
+      <ion-row>
+        <ion-col col-12 text-center class="row-title">Xổ số truyền thống {{currentDateLabel}}</ion-col>
+      </ion-row>
+      <ion-card>
+        <ion-card-content no-padding>
+          <ion-grid class="mienbac">
+            <ion-row>
+              <ion-col col-2>Giải</ion-col>
+              <ion-col col-10 text-center class="text-md-danger">Xổ số đài {{cityNameMB}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2>ĐB</ion-col>
+              <ion-col col-10 text-center><strong class="text-md-primary">{{mb.p0}}</strong></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2>Nhất</ion-col>
+              <ion-col col-10 text-center><strong>{{mb.p1}}</strong></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2>Nhì</ion-col>
+              <ion-col col-10 text-center>
+                <strong>{{mb.p2}}</strong> - <strong>{{mb.p3}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2 class="col-row-2">Ba</ion-col>
+              <ion-col col-10 text-center>
+                <strong>{{mb.p4}}</strong> - <strong>{{mb.p5}}</strong> - <strong>{{mb.p6}}</strong>
+                <br>
+                <strong>{{mb.p7}}</strong> - <strong>{{mb.p8}}</strong> - <strong>{{mb.p9}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2>Tư</ion-col>
+              <ion-col col-10 text-center>
+                <strong>{{mb.p10}}</strong> - <strong>{{mb.p11}}</strong> - <strong>{{mb.p12}}</strong> -
+                <strong>{{mb.p13}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2 class="col-row-2">Năm</ion-col>
+              <ion-col col-10 text-center>
+                <strong>{{mb.p14}}</strong> - <strong>{{mb.p15}}</strong> - <strong>{{mb.p16}}</strong>
+                <br>
+                <strong>{{mb.p17}}</strong> - <strong>{{mb.p18}}</strong> - <strong>{{mb.p19}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2>Sáu</ion-col>
+              <ion-col col-10 text-center><strong>{{mb.p20}}</strong> - <strong>{{mb.p21}}</strong> -
+                <strong>{{mb.p22}}</strong></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2>Bảy</ion-col>
+              <ion-col col-10 text-center><strong>{{mb.p23}}</strong> - <strong>{{mb.p24}}</strong> -
+                <strong>{{mb.p25}}</strong> - <strong>{{mb.p26}}</strong></ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'mien-trung'">
+      <p text-center class="text-md-danger">Xổ số Miền Trung {{currentDateLabel}}</p>
+      <page-city-result *ngFor="let city of citiesMT" [city]="city.id" [date]="currentDate"></page-city-result>
+    </div>
+    <div *ngSwitchCase="'mien-nam'">
+      <p text-center class="text-md-danger">Xổ số Miền Nam {{currentDateLabel}}</p>
+      <page-city-result *ngFor="let city of citiesMN" [city]="city.id" [date]="currentDate"></page-city-result>
+    </div>
+  </div>
+  <ion-datetime #datePicker [(ngModel)]="currentDate" [max]="currentMaxDate" [min]="currentMinDate"
+                doneText="Xong"
+                cancelText="Hủy"
+                displayFormat="YYYY-MM-DD" (ionChange)="onChangeDate($event)"
+                pickerFormat="DD MMM YYYY"
+                monthShortNames="Tháng 1,Tháng 2,Tháng 3,Tháng 4,Tháng 5,Tháng 6,Tháng 7,Tháng 8,Tháng 9,Tháng 10,Tháng 11,Tháng 12"
+                hidden></ion-datetime>
+</ion-content>

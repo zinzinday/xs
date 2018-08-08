@@ -1,11 +1,21 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Tài khoản / số dư</ion-title>
+
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <ion-buttons>
+    <button ion-button icon-start (click)="goDeposit()">
+      <ion-icon name="code-working"></ion-icon>
+      <span>Nộp tiền </span>
+    </button>
+    <button ion-button icon-end (click)="goWithdrawal()">
+      <span>Rút tiền </span>
+      <ion-icon name="code-download"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-content>

@@ -2,23 +2,23 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the BettingTypePage page.
+ * Generated class for the EmailVerifyPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-betting-type',
-  templateUrl: 'betting-type.html',
+  selector: 'page-email-verify',
+  templateUrl: 'email-verify.html',
 })
-export class BettingTypePage {
+export class EmailVerifyPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BettingTypePage');
+    console.log('ionViewDidLoad EmailVerifyPage');
   }
 
 }

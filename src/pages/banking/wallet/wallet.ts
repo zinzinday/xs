@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {DepositPage} from "../deposit/deposit";
+import {WithdrawalPage} from "../withdrawal/withdrawal";
 
 /**
  * Generated class for the WalletPage page.
@@ -21,4 +23,11 @@ export class WalletPage {
     console.log('ionViewDidLoad WalletPage');
   }
 
+  goDeposit() {
+    this.navCtrl.push(DepositPage, {}, {duration: 800}).catch();
+  }
+
+  goWithdrawal() {
+    this.navCtrl.push(WithdrawalPage, {}, {duration: 800}).catch();
+  }
 }

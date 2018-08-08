@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {LoginPage} from "../accounts/login/login";
 import {SettingPage} from "../accounts/setting/setting";
+import {AuthProvider} from "../../providers/auth/auth";
 
 @Component({
   selector: 'page-home',
@@ -9,7 +10,7 @@ import {SettingPage} from "../accounts/setting/setting";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public auth: AuthProvider) {
 
   }
 

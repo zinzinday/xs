@@ -1,19 +1,24 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-list class="app-menu">
+      <button menuClose ion-item *ngFor="let p of (pages|async)" (click)="openPage(p)">
+        <ion-icon [name]="p.icon" item-start icon-only></ion-icon>
         {{p.title}}
       </button>
     </ion-list>
   </ion-content>
-
 </ion-menu>
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>
+<ion-footer *ngIf="profile && !profile.phoneVerified">
+  <a ion-button clear small full class="text-md-danger" (click)="goVerify()">
+    Xin vui lòng xác minh tài khoản
+  </a>
+</ion-footer>
+<ion-footer *ngIf="disconnected">
+  <p class="text-md-danger" text-center="">Mất kết nối internet</p>
+</ion-footer>

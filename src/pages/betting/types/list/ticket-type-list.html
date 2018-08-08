@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Loại vé số/tỷ lệ ăn</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-fab right bottom>
+    <button ion-fab icon-only mini (click)="goCreate()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>Đang làm mới dữ liệu</ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <button ion-item *ngFor="let type of types" (click)="goType(type)">
+      {{type.name}}
+    </button>
+  </ion-list>
+</ion-content>

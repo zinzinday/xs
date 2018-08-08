@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lịch quay</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-group (click)="goResult('mien-bac')">
+      <ion-item-divider color="light">
+        Miền Bắc
+        <span item-end>18h15</span>
+      </ion-item-divider>
+      <ion-item *ngFor="let city of citiesMB">
+        {{city.name}}
+        <div class="city-info" item-end>
+          <span *ngFor="let day of city.dayOfWeek">{{weeks[day]}}</span>
+        </div>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group (click)="goResult('mien-trung')">
+      <ion-item-divider color="light">
+        Miền Trung
+        <span item-end>17h15</span>
+      </ion-item-divider>
+      <ion-item *ngFor="let city of citiesMT">
+        {{city.name}}
+        <div class="city-info" item-end>
+          <span *ngFor="let day of city.dayOfWeek">{{weeks[day]}}</span>
+        </div>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group (click)="goResult('mien-name')">
+      <ion-item-divider color="light">
+        Miền Nam
+        <span item-end>16h15</span>
+      </ion-item-divider>
+      <ion-item *ngFor="let city of citiesMN">
+        {{city.name}}
+        <div class="city-info" item-end>
+          <span *ngFor="let day of city.dayOfWeek">{{weeks[day]}}</span>
+        </div>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
